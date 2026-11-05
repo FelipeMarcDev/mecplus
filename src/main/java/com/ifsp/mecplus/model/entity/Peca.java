@@ -1,28 +1,42 @@
 package com.ifsp.mecplus.model.entity;
 
-import com.ifsp.mecplus.exception.DadoInvalidoException;
 import com.ifsp.mecplus.exception.EstoqueInsuficienteException;
+import com.ifsp.mecplus.util.Validador;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Peca {
 
-    private int codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codigo;
+
+    @Column(nullable = false)
     private String descricao;
+
+    @Column(nullable = false)
     private double valorUnitario;
+
+    @Column(nullable = false)
     private int quantidadeEmEstoque;
 
+    @Column(nullable = false)
+    private boolean ativo;
+
     public Peca(String descricao, double valorUnitario, int quantidadeInicial) {
-        if (descricao == null || descricao.isBlank()) {
-            throw new DadoInvalidoException("A descrição da peça é obrigatória.");
-        }
-        if (valorUnitario < 0) {
-            throw new DadoInvalidoException("O valor da peça não pode ser negativo.");
-        }
-        if (quantidadeInicial < 0) {
-            throw new DadoInvalidoException("A quantidade inicial não pode ser negativa.");
-        }
-        this.descricao = descricao;
-        this.valorUnitario = valorUnitario;
-        this.quantidadeEmEstoque = quantidadeInicial;
+        this.descricao = Validador.textoObrigatorio(descricao, "descrição");
+        this.valorUnitario = Validador.naoNegativo(valorUnitario, "valor unitário");
+        this.quantidadeEmEstoque = Validador.naoNegativo(quantidadeInicial, "quantidade inicial");
+        this.ativo = true;
     }
 
     public boolean verificarDisponibilidade(int quantidade) {
@@ -35,9 +49,7 @@ public class Peca {
     }
 
     public void darBaixa(int quantidade) {
-        if (quantidade <= 0) {
-            throw new DadoInvalidoException("A quantidade deve ser maior que zero.");
-        }
+        Validador.positivo(quantidade, "quantidade");
         if (!verificarDisponibilidade(quantidade)) {
             throw new EstoqueInsuficienteException(
                     "Estoque insuficiente para a peça " + descricao + ".");
@@ -46,21 +58,18 @@ public class Peca {
     }
 
     public void atualizarEstoque(int quantidade) {
-        if (quantidade <= 0) {
-            throw new DadoInvalidoException("A quantidade de reposição deve ser maior que zero.");
-        }
-        quantidadeEmEstoque += quantidade;
+        quantidadeEmEstoque += Validador.positivo(quantidade, "quantidade de reposição");
     }
 
     public void atualizarValor(double novoValor) {
-        if (novoValor < 0) {
-            throw new DadoInvalidoException("O valor da peça não pode ser negativo.");
-        }
-        this.valorUnitario = novoValor;
+        this.valorUnitario = Validador.naoNegativo(novoValor, "valor unitário");
     }
 
-    public int getCodigo() { return codigo; }
-    public String getDescricao() { return descricao; }
-    public double getValorUnitario() { return valorUnitario; }
-    public int getQuantidadeEmEstoque() { return quantidadeEmEstoque; }
+    public void inativar() {
+        this.ativo = false;
+    }
+
+    public void reativar() {
+        this.ativo = true;
+    }
 }
