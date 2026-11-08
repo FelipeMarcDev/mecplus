@@ -42,6 +42,11 @@ public class Mecanico extends Usuario {
         return PERMISSOES.contains(funcionalidade);
     }
 
+    @Override
+    public Set<String> getPermissoes() {
+        return PERMISSOES;
+    }
+
     public void atualizarDados(String especialidade, String telefone) {
         this.especialidade = Validador.textoObrigatorio(especialidade, "especialidade");
         this.telefone = Validador.textoObrigatorio(telefone, "telefone");

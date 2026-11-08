@@ -2,7 +2,6 @@ package com.ifsp.mecplus.service;
 
 import com.ifsp.mecplus.exception.DadoInvalidoException;
 import com.ifsp.mecplus.exception.EstoqueInsuficienteException;
-import com.ifsp.mecplus.exception.OperacaoNaoPermitidaException;
 import com.ifsp.mecplus.exception.RegistroNaoEncontradoException;
 import com.ifsp.mecplus.model.entity.Cliente;
 import com.ifsp.mecplus.model.entity.ItemPeca;

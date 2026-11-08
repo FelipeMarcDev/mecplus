@@ -35,4 +35,9 @@ public class Atendente extends Usuario {
     public boolean verificarPermissao(String funcionalidade) {
         return PERMISSOES.contains(funcionalidade);
     }
+    
+    @Override
+    public Set<String> getPermissoes() {
+        return PERMISSOES;
+    }
 }

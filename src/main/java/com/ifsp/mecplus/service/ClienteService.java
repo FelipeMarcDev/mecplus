@@ -67,6 +67,11 @@ public class ClienteService {
     }
 
     @Transactional(readOnly = true)
+    public List<Cliente> listarAtivos() {
+        return clienteRepository.findByAtivoTrue();
+    }
+
+    @Transactional(readOnly = true)
     public List<Cliente> listar(String busca) {
         if (busca == null || busca.isBlank()) {
             return clienteRepository.findAll(Sort.by("nome"));

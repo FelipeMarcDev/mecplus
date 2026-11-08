@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
+import java.util.Set;
 
 // Herança: uma única tabela "usuario" com a coluna "perfil" distinguindo as subclasses
 @Entity
@@ -72,6 +73,8 @@ public abstract class Usuario {
     public abstract Perfil getPerfil();
 
     public abstract boolean verificarPermissao(String funcionalidade);
+
+    public abstract Set<String> getPermissoes();
 
     public boolean autenticar(String login, String senha) {
         if (!ativo || login == null || senha == null) {

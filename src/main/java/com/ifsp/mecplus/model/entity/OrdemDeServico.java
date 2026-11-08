@@ -4,6 +4,7 @@ import com.ifsp.mecplus.exception.EstadoInvalidoException;
 import com.ifsp.mecplus.exception.EstoqueInsuficienteException;
 import com.ifsp.mecplus.exception.OperacaoNaoPermitidaException;
 import com.ifsp.mecplus.model.enums.Perfil;
+import com.ifsp.mecplus.model.enums.SituacaoOrcamento;
 import com.ifsp.mecplus.model.enums.StatusOS;
 import com.ifsp.mecplus.util.Validador;
 import jakarta.persistence.CascadeType;
@@ -354,6 +355,29 @@ public class OrdemDeServico {
 
     public boolean estaEmAberto() {
         return status != StatusOS.CONCLUIDA && status != StatusOS.ENTREGUE;
+    }
+
+    // ---------- Perguntas de estado (a tela consulta o objeto em vez de repetir regras) ----------
+
+    public boolean aceitaAlteracaoDeItens() {
+        return (status == StatusOS.ABERTA || status == StatusOS.AGUARDANDO_PECA)
+                && (orcamento == null || !orcamento.estaAprovado());
+    }
+
+    public boolean estaEmExecucao() {
+        return status == StatusOS.EM_ANDAMENTO;
+    }
+
+    public boolean estaConcluida() {
+        return status == StatusOS.CONCLUIDA;
+    }
+
+    public boolean orcamentoAprovado() {
+        return orcamento != null && orcamento.estaAprovado();
+    }
+
+    public boolean orcamentoPendente() {
+        return orcamento != null && orcamento.getSituacao() == SituacaoOrcamento.PENDENTE;
     }
 
     // ---------- Acesso somente leitura às listas ----------

@@ -111,6 +111,11 @@ public class UsuarioService {
     }
 
     @Transactional(readOnly = true)
+    public List<Mecanico> listarMecanicos() {
+        return mecanicoRepository.findAll(Sort.by("nome"));
+    }
+
+    @Transactional(readOnly = true)
     public List<Mecanico> listarMecanicosAtivos() {
         return mecanicoRepository.findByAtivoTrue();
     }

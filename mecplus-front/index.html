@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MEC+ - Gestão da oficina</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<!-- Tela de login -->
+<section id="tela-login" class="tela-login" hidden>
+    <form id="form-login" class="cartao-login">
+        <div class="logo">
+            <span class="logo-icone">🔧</span>
+            <div><strong>MEC<span class="vermelho">+</span></strong><small>Gestão da oficina</small></div>
+        </div>
+        <h1>Entrar</h1>
+        <p id="aviso-login" class="aviso-login" hidden></p>
+        <label>Login
+            <input name="login" autocomplete="username" required autofocus>
+        </label>
+        <label>Senha
+            <input type="password" name="senha" autocomplete="current-password" required>
+        </label>
+        <p id="erro-login" class="erro-form" hidden></p>
+        <button class="btn primario largura-total" type="submit">Entrar</button>
+    </form>
+</section>
+
+<!-- Aplicação -->
+<div id="app" class="app" hidden>
+    <aside class="lateral">
+        <div class="logo">
+            <span class="logo-icone">🔧</span>
+            <div><strong>MEC<span class="vermelho">+</span></strong><small>Gestão da oficina</small></div>
+        </div>
+        <nav id="menu" class="menu"></nav>
+        <div class="usuario">
+            <span id="avatar" class="avatar"></span>
+            <div class="usuario-dados"><strong id="usuario-nome"></strong><small id="usuario-perfil"></small></div>
+            <button id="btn-sair" class="btn-icone" title="Sair" aria-label="Sair">⎋</button>
+        </div>
+    </aside>
+
+    <div class="conteudo">
+        <header class="topo">
+            <span id="data-hoje" class="data-hoje"></span>
+            <div class="topo-acoes">
+                <button id="btn-ajuda" class="btn secundario">? Ajuda</button>
+                <button id="btn-nova-os" class="btn primario" hidden>+ Nova OS</button>
+            </div>
+        </header>
+        <main id="principal"></main>
+    </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
