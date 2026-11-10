@@ -4,7 +4,6 @@ import com.ifsp.mecplus.web.BaseController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.ifsp.mecplus.model.entity.Usuario;
-import com.ifsp.mecplus.model.enums.Perfil;
 import com.ifsp.mecplus.service.UsuarioService;
 import com.ifsp.mecplus.web.RequerPermissao;
 import com.ifsp.mecplus.web.dto.Requisicoes.UsuarioReq;

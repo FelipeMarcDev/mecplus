@@ -11,7 +11,6 @@ import com.ifsp.mecplus.web.SessaoUsuario;
 import com.ifsp.mecplus.model.enums.Perfil;
 import com.ifsp.mecplus.web.dto.Respostas.*;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/painel")

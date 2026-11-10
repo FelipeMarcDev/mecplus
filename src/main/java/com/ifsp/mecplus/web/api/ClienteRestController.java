@@ -3,8 +3,6 @@ package com.ifsp.mecplus.web.api;
 import com.ifsp.mecplus.web.BaseController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import com.ifsp.mecplus.model.entity.Cliente;
-import com.ifsp.mecplus.model.entity.Veiculo;
 import com.ifsp.mecplus.service.ClienteService;
 import com.ifsp.mecplus.service.VeiculoService;
 import com.ifsp.mecplus.web.dto.Respostas.ClienteResp;

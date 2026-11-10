@@ -11,15 +11,15 @@ import * as historico from "./telas/historico.js";
 
 // Cada rota tem: texto do menu, ícone, tela e (opcional) a permissão exigida para vê-la
 const ROTAS = {
-    inicio: { rotulo: "Início", icone: "🏠", render: inicio.render },
-    os: { rotulo: "Ordens de serviço", icone: "📋", render: ordens.render },
-    clientes: { rotulo: "Clientes", icone: "👤", render: clientes.render, permissao: "CADASTRAR_CLIENTE_VEICULO" },
-    veiculos: { rotulo: "Veículos", icone: "🚗", render: veiculos.render },
-    pecas: { rotulo: "Peças e estoque", icone: "📦", render: catalogo.renderPecas },
-    historico: { rotulo: "Histórico", icone: "🕘", render: historico.render },
-    servicos: { rotulo: "Serviços", icone: "🛠️", render: catalogo.renderServicos, permissao: "CADASTRAR_SERVICO_PECA_MECANICO" },
-    mecanicos: { rotulo: "Mecânicos", icone: "👷", render: equipe.renderMecanicos, permissao: "CADASTRAR_SERVICO_PECA_MECANICO" },
-    usuarios: { rotulo: "Usuários", icone: "🔑", render: equipe.renderUsuarios, permissao: "GERENCIAR_USUARIOS" },
+    inicio: { rotulo: "Início", render: inicio.render },
+    os: { rotulo: "Ordens de serviço", render: ordens.render },
+    clientes: { rotulo: "Clientes", render: clientes.render, permissao: "CADASTRAR_CLIENTE_VEICULO" },
+    veiculos: { rotulo: "Veículos", render: veiculos.render },
+    pecas: { rotulo: "Peças e estoque",  render: catalogo.renderPecas },
+    historico: { rotulo: "Histórico", render: historico.render },
+    servicos: { rotulo: "Serviços", render: catalogo.renderServicos, permissao: "CADASTRAR_SERVICO_PECA_MECANICO" },
+    mecanicos: { rotulo: "Mecânicos", render: equipe.renderMecanicos, permissao: "CADASTRAR_SERVICO_PECA_MECANICO" },
+    usuarios: { rotulo: "Usuários", render: equipe.renderUsuarios, permissao: "GERENCIAR_USUARIOS" },
 };
 
 // Ajuda contextual (H10): um texto curto para cada tela
@@ -98,7 +98,7 @@ function entrar(sessao) {
 function montarMenu() {
     document.getElementById("menu").innerHTML = Object.entries(ROTAS)
         .filter(([, r]) => !r.permissao || estado.pode(r.permissao))
-        .map(([chave, r]) => `<a href="#/${chave}" data-rota="${chave}"><span>${r.icone}</span> ${esc(r.rotulo)}</a>`)
+        .map(([chave, r]) => `<a href="#/${chave}" data-rota="${chave}">${esc(r.rotulo)}</a>`)
         .join("");
 }
 
